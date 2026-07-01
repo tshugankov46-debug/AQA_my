@@ -6,12 +6,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import ru.qaway.pages.CartPage;
 import ru.qaway.pages.InventoryPage;
 import ru.qaway.pages.LoginPage;
 import static org.junit.jupiter.api.Assertions.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.time.Duration;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class InventoryTest {
 
@@ -20,7 +22,12 @@ public class InventoryTest {
   @BeforeEach
   void setUp() {
     WebDriverManager.chromedriver().setup();
-    driver = new ChromeDriver();
+    ChromeOptions options = new ChromeOptions();
+    options.addArguments("--password-store=basic");
+    options.addArguments("--disable-save-password-bubble");
+    options.addArguments("--disable-features=PasswordLeakDetection");
+    options.addArguments("--incognito");// отключает менеджер паролей
+    driver = new ChromeDriver(options);
     driver.get("https://www.saucedemo.com/");
   }
 

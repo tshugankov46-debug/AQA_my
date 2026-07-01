@@ -9,24 +9,22 @@ public class LoginPage {
 
   WebDriver driver;
 
-  public LoginPage(WebDriver driver) {
-    this.driver = driver;
-  }
-
-  public String getErrorMessage() {
-    return driver.findElement(errorMessage).getText();
-  }
-
-  public String getTitle(){
-    return  driver.findElement(logoPage).getText();
-  }
-
   By usernameField = By.id("user-name");
   By passwordField = By.id("password");
   By loginButton = By.id("login-button");
   By errorMessage = By.cssSelector(".error-message-container");
   By logoPage = By.cssSelector(".login_logo");
 
+
+  public LoginPage(WebDriver driver) {
+    this.driver = driver;
+  }
+  public String getErrorMessage() {
+    return driver.findElement(errorMessage).getText();
+  }
+  public String getTitle(){
+    return  driver.findElement(logoPage).getText();
+  }
   public void login(String username, String password) {
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     wait.until(ExpectedConditions.elementToBeClickable(loginButton));

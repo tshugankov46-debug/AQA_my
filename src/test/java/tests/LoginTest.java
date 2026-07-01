@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.time.Duration;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class LoginTest {
 
@@ -19,9 +20,13 @@ public class LoginTest {
   @BeforeEach
   void setUp() {
     WebDriverManager.chromedriver().setup();
-    driver = new ChromeDriver();
+    ChromeOptions options = new ChromeOptions();
+    options.addArguments("--password-store=basic");
+    options.addArguments("--disable-save-password-bubble");
+    options.addArguments("--disable-features=PasswordLeakDetection");// отключает менеджер паролей
+    options.addArguments("--incognito");
+    driver = new ChromeDriver(options);
     driver.get("https://www.saucedemo.com/");
-    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
   }
 
   @AfterEach
